@@ -1,0 +1,11 @@
+{
+  "name": "ZeroDevBox",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "backend",
+  "workspaceFolder": "/workspace",
+  "settings": {},
+  "extensions": [
+    "ms-python.python",
+    "esbenp.prettier-vscode"
+  ]
+}
