@@ -6,34 +6,37 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: app
-    ports:
-      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
   backend:
     build: ./backend
     restart: always
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-    volumes:
-      - ./backend:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    expose:
+      - "8000"
     environment:
       DATABASE_URL: postgresql://user:password@db:5432/app
-    ports:
-      - "8000:8000"
     depends_on:
       - db
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
     restart: always
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+
+  nginx:
+    image: nginx:latest
     ports:
-      - "5173:5173"
+      - "3000:80"
     depends_on:
+      - frontend
       - backend
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - frontend_dist:/usr/share/nginx/html:ro
 
 volumes:
   db_data:
+  frontend_dist:
