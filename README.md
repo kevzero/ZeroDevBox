@@ -1,48 +1,47 @@
-# ⚡ ZeroDevBox – One-Click Full-Stack Development Environment
+# ZeroDevBox – Full-Stack Development Environment (React + FastAPI + PostgreSQL)
 
-ZeroDevBox is a complete template to quickly spin up a **full-stack development environment** using **React (Vite)**, **FastAPI**, and **PostgreSQL**, fully containerized with **Docker** and ready for **GitHub Codespaces**.
+ZeroDevBox provides a complete **full-stack development environment** using **React (Vite)** for the frontend, **FastAPI** for the backend, and **PostgreSQL** as the database, fully containerized with **Docker**. Designed for local development and GitHub Codespaces.
 
 ---
 
 ## 🚀 Features
-- ✅ **Frontend:** React (Vite)
-- ✅ **Backend:** FastAPI with JWT Authentication
-- ✅ **Database:** PostgreSQL with persistent volume
-- ✅ Secure login with bcrypt-hashed passwords
-- ✅ Role-based access control (user / admin)
-- ✅ Admin-only dashboard
-- ✅ API documentation via Swagger
-- ✅ One-command setup (`docker-compose up --build`)
-- ✅ Works with Docker Desktop, Codespaces, DevPod
+
+* ✅ **Frontend**: React + Vite (development mode with hot reload)
+* ✅ **Backend**: FastAPI with REST API support and Swagger UI
+* ✅ **Database**: PostgreSQL with persistent storage
+* ✅ **Dockerized Architecture**: One-command setup using Docker Compose
+* ✅ **API Documentation**: Integrated Swagger UI
+* ✅ Works seamlessly with **Docker Desktop**, **Codespaces**, and **DevPod**
 
 ---
 
 ## 🧰 Requirements
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
-- [Git](https://git-scm.com/)
+
+* [Docker](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
+* [Git](https://git-scm.com/)
 
 ---
 
 ## 🛠️ Setup & Run
 
-### 1️⃣ Clone the repository
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/YOUR-USERNAME/ZeroDevBox.git
 cd ZeroDevBox
 ```
 
-### 2️⃣ Start the environment
-- **Linux/Mac**
+### 2. Start the environment in development mode
+
 ```bash
-make start
-```
-- **Windows PowerShell**
-```bash
-docker-compose up --build
+docker-compose down --volumes --remove-orphans
+docker-compose build --no-cache
+docker-compose up -d
 ```
 
-### 3️⃣ Stop the containers
+### 3. Stop the containers
+
 ```bash
 docker-compose down
 ```
@@ -50,97 +49,103 @@ docker-compose down
 ---
 
 ## 🌐 Available Services
-| Service     | URL                                  |
-|-------------|--------------------------------------|
-| Frontend    | [http://localhost:3000](http://localhost:3000) |
-| Backend API | [http://localhost:8000](http://localhost:8000) |
-| Swagger Docs| [http://localhost:8000/docs](http://localhost:8000/docs) |
-| PostgreSQL  | `localhost:5432` (user: `user`, password: `password`, db: `app`) |
+
+| Service      | URL                                                              |
+| ------------ | ---------------------------------------------------------------- |
+| **Frontend** | [http://localhost:5173](http://localhost:5173)                   |
+| **Backend**  | [http://localhost:8000](http://localhost:8000)                   |
+| **Swagger**  | [http://localhost:8000/docs](http://localhost:8000/docs)         |
+| **Database** | `localhost:5432` (user: `user`, password: `password`, db: `app`) |
 
 ---
 
-## 🔐 Authentication
-- Register and login using **JWT tokens**
-- Token stored in `localStorage`
-- Roles:
-  - `user` → basic access
-  - `admin` → dashboard access
+## 🔐 Authentication (Future Features)
+
+* JWT Authentication with access and refresh tokens
+* Role-based access control (user / admin)
+* Secure password hashing using bcrypt
+* Admin dashboard for managing users and data
 
 ---
 
-## 📋 Main API Endpoints
-| Method | Endpoint             | Description                |
-|--------|----------------------|---------------------------|
-| POST   | `/signup`           | Register new user        |
-| POST   | `/login`            | Login and receive JWT    |
-| GET    | `/users`            | List users (protected)   |
-| PUT    | `/update_user/{id}` | Update user data         |
-| DELETE | `/delete_user/{id}` | Delete user              |
-| GET    | `/dashboard`        | Admin-only access        |
+## 📋 Main API Endpoints (Planned)
 
-Full API Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
+| Method | Endpoint     | Description            |
+| ------ | ------------ | ---------------------- |
+| POST   | `/signup`    | Register a new user    |
+| POST   | `/login`     | Login and receive JWT  |
+| GET    | `/users`     | List all users (admin) |
+| GET    | `/dashboard` | Admin-only access      |
+
+Full interactive docs available at: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
 ## 📂 Project Structure
+
 ```
 ZeroDevBox/
-├── frontend/         # React + Vite
-│   ├── src/          # Frontend source code
-│   ├── Dockerfile    # Frontend container
+├── frontend/         # React + Vite source code
+│   ├── src/          # Frontend components and pages
+│   ├── Dockerfile    # Frontend container setup
 │   └── package.json
 │
-├── backend/          # FastAPI app
-│   ├── main.py       # API logic
+├── backend/          # FastAPI backend app
+│   ├── main.py       # API entry point
 │   ├── requirements.txt
 │   └── Dockerfile
 │
 ├── docker-compose.yml
-├── Makefile
 └── README.md
 ```
 
 ---
 
 ## 🔄 Useful Commands
-- Start:  
-```bash
-make start
-```
-or  
+
+### Start Development Environment
+
 ```bash
 docker-compose up --build
 ```
 
-- Stop:  
+### Stop Containers
+
 ```bash
 docker-compose down
 ```
 
-- Rebuild:  
+### Rebuild Everything
+
 ```bash
-make rebuild
+docker-compose build --no-cache
 ```
 
 ---
 
 ## 🧪 API Testing
-Swagger UI:  
-[http://localhost:8000/docs](http://localhost:8000/docs)
+
+Use Swagger UI for interactive API testing:
+
+```
+http://localhost:8000/docs
+```
 
 ---
 
-## 🔮 Future Improvements
-- ✅ GitHub Actions CI/CD pipeline
-- ✅ Social Login (Google, GitHub)
-- ✅ JWT refresh tokens & expiry
-- ✅ File/image upload
-- ✅ Advanced admin panel
-- ✅ Auto deploy to Render / VPS
+## 🔮 Future Enhancements
+
+* ✅ GitHub Actions CI/CD pipeline
+* ✅ Social Login (Google, GitHub)
+* ✅ JWT refresh tokens & expiration handling
+* ✅ File/Image upload support
+* ✅ Advanced admin dashboard
+* ✅ Deployment templates for Render/VPS
 
 ---
 
 ## ❤️ Contribute
-- Fork this repository
-- Create a new branch: `feature-name`
-- Submit a Pull Request
+
+* Fork this repository
+* Create a new feature branch
+* Submit a Pull Request
